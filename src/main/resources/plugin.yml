@@ -1,0 +1,4 @@
+name: MineUnaerp
+version: '${project.version}'
+main: br.mineunaerp.MineUnaerp
+api-version: 1.19
