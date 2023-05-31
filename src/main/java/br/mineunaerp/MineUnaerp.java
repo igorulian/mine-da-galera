@@ -1,5 +1,6 @@
 package br.mineunaerp;
 
+import br.mineunaerp.events.InventoryClickEvent;
 import br.mineunaerp.events.JoinLeaveEvent;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +13,7 @@ public final class MineUnaerp extends JavaPlugin implements Listener {
         System.out.println("[MineUnaerp] Plugin started");
 
         getServer().getPluginManager().registerEvents(new JoinLeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new InventoryClickEvent(), this);
 
         getCommand("painel").setExecutor(new PanelCommand());
     }
