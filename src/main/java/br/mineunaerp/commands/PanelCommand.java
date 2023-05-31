@@ -1,10 +1,12 @@
 package br.mineunaerp.commands;
 
+import br.mineunaerp.gui.PanelGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 public class PanelCommand implements CommandExecutor {
     @Override
@@ -19,10 +21,11 @@ public class PanelCommand implements CommandExecutor {
 
         if(command.getName().equalsIgnoreCase("painel")){
             player.sendMessage("Comando painel");
-            return true;
+            PanelGUI panel = new PanelGUI(player);
+            player.openInventory(panel.getInventory());
         }
 
 
-        return false;
+        return true;
     }
 }
