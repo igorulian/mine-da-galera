@@ -2,3 +2,9 @@ name: MineUnaerp
 version: '${project.version}'
 main: br.mineunaerp.MineUnaerp
 api-version: 1.19
+commands:
+  painel:
+    description: Comando para acessar o painel de recursos do servidor.
+    usage: /<command>
+    aliases:
+      - p
