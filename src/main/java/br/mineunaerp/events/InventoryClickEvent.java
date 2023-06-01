@@ -60,7 +60,6 @@ public class InventoryClickEvent implements Listener {
             }
 
             if(itemName.equalsIgnoreCase("Alterar skin")){
-                player.closeInventory();
                 answer.ask(player, "Digite para qual skin deseja alterar:", new AnswerCallback() {
                     @Override
                     public boolean isAnswer(String message) {
@@ -71,6 +70,37 @@ public class InventoryClickEvent implements Listener {
                     public void onAnswer(Player player, String answer) {
                         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                         Bukkit.dispatchCommand(console, "skin set " + player.getName() + " " + answer);
+                    }
+                });
+            }
+
+            if(itemName.equalsIgnoreCase("Comprar terreno")){
+                player.performCommand("chunk claim");
+            }
+
+            if(itemName.equalsIgnoreCase("Mostrar o terreno")){
+                player.performCommand("chunk show 10");
+            }
+
+            if(itemName.equalsIgnoreCase("Mostrar terrenos ocupados por perto")){
+                player.performCommand("chunk show claimed 40 10");
+            }
+
+            if(itemName.equalsIgnoreCase(ChatColor.RED +"Desocupar terreno")){
+                player.performCommand("chunk unclaim");
+            }
+
+            if(itemName.equalsIgnoreCase("Acesso ao terreno")){
+                answer.ask(player, "Digite o nick do jogador que deseja conceder/remover o acesso:", new AnswerCallback() {
+                    @Override
+                    public boolean isAnswer(String message) {
+                        return true;
+                    }
+
+                    @Override
+                    public void onAnswer(Player player, String answer) {
+//                        player.setDisplayName(answer);
+                        player.performCommand("chunk access "+ answer);
                     }
                 });
             }

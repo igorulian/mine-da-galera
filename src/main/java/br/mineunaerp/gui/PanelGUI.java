@@ -10,7 +10,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
+
+
 public class PanelGUI {
+    private int INVENTORY_SIZE = 9*3;
     Player player;
     Inventory inventory;
 
@@ -24,7 +27,16 @@ public class PanelGUI {
     }
 
     private Inventory setupInventory(){
-        Inventory inv = Bukkit.createInventory(player, 9*3, "Painel");
+        Inventory inv = Bukkit.createInventory(player, INVENTORY_SIZE, "Painel");
+
+        ItemStack background = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+        ItemMeta bmeta = background.getItemMeta();
+        bmeta.setDisplayName(" ");
+        background.setItemMeta(bmeta);
+
+        for (int x = 0; x < INVENTORY_SIZE; x++){
+            inv.setItem(x, background);
+        }
 
 
         ItemStack itemChangeName = createItem(
@@ -51,9 +63,6 @@ public class PanelGUI {
                 new String[]{
                         "Clique para comprar o terreno que",
                         "está atualmete em cima",
-                        "Preço atual: " + ChatColor.BLUE +  " 00 Diamantes",
-                        ChatColor.DARK_GRAY + "Lembrando: os terrenos são separados por chunks",
-                        ChatColor.DARK_GRAY + "Lembrando: os terrenos custão DIAMANTES"
         });
 
         ItemStack itemShowPlot = createItem(
@@ -81,10 +90,10 @@ public class PanelGUI {
         });
 
         ItemStack itemAccessPlot = createItem(
-                Material.CREEPER_BANNER_PATTERN,
+                Material.NAME_TAG,
                 "Acesso ao terreno",
                 new String[]{
-                        "Clique para " + ChatColor.GOLD + "conceder/remover" + ChatColor.DARK_GRAY + "o acesso",
+                        "Clique para " + ChatColor.GOLD + "conceder/remover" + ChatColor.DARK_GRAY + " o acesso",
                         "de um determinado player aos seus terrenos"
         });
 
@@ -105,7 +114,7 @@ public class PanelGUI {
         ItemStack item = new ItemStack(material);
 
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setDisplayName(ChatColor.YELLOW + name);
+        itemMeta.setDisplayName(name);
 
         ArrayList<String> itemLore = new ArrayList<>();
 

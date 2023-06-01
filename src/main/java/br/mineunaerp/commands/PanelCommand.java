@@ -20,7 +20,6 @@ public class PanelCommand implements CommandExecutor {
         Player player = (Player) commandSender;
 
         if(command.getName().equalsIgnoreCase("painel")){
-            player.sendMessage("Comando painel");
             PanelGUI panel = new PanelGUI(player);
             player.openInventory(panel.getInventory());
         }
