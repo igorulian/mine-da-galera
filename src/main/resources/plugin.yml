@@ -8,3 +8,5 @@ commands:
     usage: /<command>
     aliases:
       - p
+  pergunta:
+    description: A
