@@ -51,10 +51,8 @@ public class InventoryClickEvent implements Listener {
 
                     @Override
                     public void onAnswer(Player player, String answer) {
-//                        player.setDisplayName(answer);
-                        player.sendMessage(" ");
-                        player.sendMessage(ChatColor.GREEN + "Usuário alterado com sucesso!");
-                        player.sendMessage(" ");
+                        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+                        Bukkit.dispatchCommand(console, "displaynameplayer " + player.getName() + " " + answer);
                     }
                 });
             }
