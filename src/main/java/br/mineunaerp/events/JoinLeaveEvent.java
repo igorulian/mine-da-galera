@@ -12,6 +12,6 @@ public class JoinLeaveEvent implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage("§7[§a+§7] " + player.getDisplayName());
 
-        player.sendTitle("Bem-vindo", "Bem-vindo ao mine da unaerp :)");
+        player.sendTitle("Bem-vindo", "Ao mine da galera :)");
     }
 }

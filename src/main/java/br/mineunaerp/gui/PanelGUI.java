@@ -90,12 +90,20 @@ public class PanelGUI {
         });
 
         ItemStack itemAccessPlot = createItem(
-                Material.NAME_TAG,
-                "Acesso ao terreno",
+                Material.LIME_CONCRETE,
+                "Conceder acesso ao terreno",
                 new String[]{
-                        "Clique para " + ChatColor.GOLD + "conceder/remover" + ChatColor.DARK_GRAY + " o acesso",
-                        "de um determinado player aos seus terrenos"
+                        "Clique para " + ChatColor.GREEN + "conceder" + ChatColor.DARK_GRAY + " o acesso",
+                        "de um determinado jogador"
         });
+
+        ItemStack itemRemoveAccessPlot = createItem(
+                Material.RED_CONCRETE,
+                "Remover acesso ao terreno",
+                new String[]{
+                        "Clique para " + ChatColor.RED + "remover" + ChatColor.DARK_GRAY + " o acesso",
+                        "de um determinado jogador"
+                });
 
         inv.setItem(1, itemChangeName);
         inv.setItem(2, itemChangeSkin);
@@ -105,8 +113,9 @@ public class PanelGUI {
         inv.setItem(20, itemShowPlot);
         inv.setItem(21, itemShowNearPlot);
 
-        inv.setItem(24, itemUnclaimPlot);
-        inv.setItem(25, itemAccessPlot);
+        inv.setItem(23, itemUnclaimPlot);
+        inv.setItem(24, itemAccessPlot);
+        inv.setItem(25, itemRemoveAccessPlot);
         return  inv;
     }
 

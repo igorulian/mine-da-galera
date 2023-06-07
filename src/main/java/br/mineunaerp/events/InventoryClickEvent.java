@@ -2,12 +2,18 @@ package br.mineunaerp.events;
 
 import br.mineunaerp.util.Answer;
 import br.mineunaerp.util.AnswerCallback;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import net.md_5.bungee.api.chat.TextComponent;
+
+import java.awt.*;
 
 public class InventoryClickEvent implements Listener {
     private Answer answer;
@@ -88,8 +94,8 @@ public class InventoryClickEvent implements Listener {
                 player.performCommand("chunk unclaim");
             }
 
-            if(itemName.equalsIgnoreCase("Acesso ao terreno")){
-                answer.ask(player, "Digite o nick do jogador que deseja conceder/remover o acesso:", new AnswerCallback() {
+            if(itemName.equalsIgnoreCase("Conceder acesso ao terreno")){
+                answer.ask(player, "Digite o nick do jogador que deseja conceder o acesso:", new AnswerCallback() {
                     @Override
                     public boolean isAnswer(String message) {
                         return true;
@@ -98,7 +104,84 @@ public class InventoryClickEvent implements Listener {
                     @Override
                     public void onAnswer(Player player, String answer) {
 //                        player.setDisplayName(answer);
-                        player.performCommand("chunk access "+ answer);
+                        player.sendMessage(" ");
+                        player.sendMessage("Conceder acesso de " + ChatColor.GOLD + answer + ChatColor.RESET + " para:");
+                        player.sendMessage(" ");
+
+                        TextComponent all = new TextComponent("[Todos os meus terrenos]");
+                        all.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+                        all.setBold(true);
+                        all.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/chunk access "+ answer + " allChunks:true"));
+                        all.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                new ComponentBuilder("Clique para conceder ao jogador " + answer + " acesso a TODOS os seus terrenos")
+                                        .color(net.md_5.bungee.api.ChatColor.DARK_GRAY)
+                                        .italic(true)
+                                        .create()
+                        ));
+                        player.spigot().sendMessage(all);
+
+                        player.sendMessage(" ");
+
+                        TextComponent just = new TextComponent("[Apenas o terro que estou em cima]");
+                        just.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+                        just.setBold(true);
+                        just.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/chunk access "+ answer + " allChunks:false"));
+                        just.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                new ComponentBuilder("Clique para conceder ao jogador " + answer + " acesso apenas ao terreno que você está atualmente em cima")
+                                        .color(net.md_5.bungee.api.ChatColor.DARK_GRAY)
+                                        .italic(true)
+                                        .create()
+                        ));
+                        player.spigot().sendMessage(just);
+
+                        player.sendMessage(" ");
+                        player.sendMessage(ChatColor.DARK_GRAY + "Clique na opção desejada a cima");
+                    }
+                });
+            }
+
+            if(itemName.equalsIgnoreCase("Remover acesso ao terreno")){
+                answer.ask(player, "Digite o nick do jogador que deseja remover o acesso:", new AnswerCallback() {
+                    @Override
+                    public boolean isAnswer(String message) {
+                        return true;
+                    }
+
+                    @Override
+                    public void onAnswer(Player player, String answer) {
+//                        player.setDisplayName(answer);
+                        player.sendMessage(" ");
+                        player.sendMessage("Remover acesso de " + ChatColor.GOLD + answer + ChatColor.RESET + " para:");
+                        player.sendMessage(" ");
+
+                        TextComponent all = new TextComponent("[Todos os meus terrenos]");
+                        all.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+                        all.setBold(true);
+                        all.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "chunk access "+ answer + " allChunks:true"));
+                        all.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                new ComponentBuilder("Clique para remove o acesso do jogador " + answer + " a TODOS os seus terrenos")
+                                        .color(net.md_5.bungee.api.ChatColor.DARK_GRAY)
+                                        .italic(true)
+                                        .create()
+                        ));
+                        player.spigot().sendMessage(all);
+
+                        player.sendMessage(" ");
+
+                        TextComponent just = new TextComponent("[Apenas o terro que estou em cima]");
+                        just.setColor(net.md_5.bungee.api.ChatColor.YELLOW);
+                        just.setBold(true);
+                        just.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "chunk access "+ answer + " allChunks:false"));
+                        just.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                                new ComponentBuilder("Clique para remove o acesso do jogador " + answer + " apenas ao terreno que você está atualmente em cima")
+                                        .color(net.md_5.bungee.api.ChatColor.DARK_GRAY)
+                                        .italic(true)
+                                        .create()
+                        ));
+                        player.spigot().sendMessage(just);
+
+                        player.sendMessage(" ");
+                        player.sendMessage(ChatColor.DARK_GRAY + "Clique na opção desejada a cima");
                     }
                 });
             }
