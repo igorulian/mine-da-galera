@@ -3,6 +3,7 @@ package br.mineunaerp;
 import br.mineunaerp.commands.PanelCommand;
 import br.mineunaerp.events.InventoryClickEvent;
 import br.mineunaerp.events.JoinLeaveEvent;
+import br.mineunaerp.events.OnDead;
 import br.mineunaerp.util.Answer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,6 +30,7 @@ public final class MineUnaerp extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(answer, this);
         getServer().getPluginManager().registerEvents(new JoinLeaveEvent(), this);
+        getServer().getPluginManager().registerEvents(new OnDead(), this);
         getServer().getPluginManager().registerEvents(new InventoryClickEvent(answer), this);
 
         getCommand("painel").setExecutor(new PanelCommand());
